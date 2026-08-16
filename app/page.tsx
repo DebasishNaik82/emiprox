@@ -85,29 +85,58 @@ export default function Page() {
         return <EligibilityCalculator currency={currency} />;
       default:
         return (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {['Loans', 'Investment', 'Tax'].map(category => (
-              <div key={category} className="col-span-1 sm:col-span-2 lg:col-span-3">
-                <h2 className="text-xl font-display font-bold tracking-tight mb-4 text-zinc-800 dark:text-zinc-100">{category}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {calculators.filter(c => c.category === category).map((calc) => (
-                    <button
-                      key={calc.id}
-                      onClick={() => setActiveTab(calc.id as CalculatorType)}
-                      className="flex items-center p-4 bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 hover:shadow-md hover:border-emerald-500 transition-all text-left group"
-                    >
-                      <div className="p-3 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg mr-4 group-hover:scale-110 transition-transform">
-                        <calc.icon size={24} />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-display font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">{calc.name}</h3>
-                      </div>
-                      <ChevronRight size={20} className="text-zinc-400 group-hover:text-emerald-500 transition-colors" />
-                    </button>
-                  ))}
+          <div className="space-y-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {['Loans', 'Investment', 'Tax'].map(category => (
+                <div key={category} className="col-span-1 sm:col-span-2 lg:col-span-3">
+                  <h2 className="text-xl font-display font-bold tracking-tight mb-4 text-zinc-800 dark:text-zinc-100">{category} Calculators</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {calculators.filter(c => c.category === category).map((calc) => (
+                      <button
+                        key={calc.id}
+                        onClick={() => setActiveTab(calc.id as CalculatorType)}
+                        className="flex items-center p-4 bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 hover:shadow-md hover:border-emerald-500 transition-all text-left group"
+                      >
+                        <div className="p-3 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg mr-4 group-hover:scale-110 transition-transform">
+                          <calc.icon size={24} />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-display font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">{calc.name}</h3>
+                        </div>
+                        <ChevronRight size={20} className="text-zinc-400 group-hover:text-emerald-500 transition-colors" />
+                      </button>
+                    ))}
+                  </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Evergreen Financial Guides Section */}
+            <div className="pt-8 border-t border-zinc-200 dark:border-zinc-800">
+              <h2 className="text-xl font-display font-bold tracking-tight mb-4 text-zinc-800 dark:text-zinc-100">Evergreen Financial Guides</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  { slug: 'emi-calculation-explained', title: 'EMI Calculation Explained' },
+                  { slug: 'loan-interest-calculation-explained', title: 'Loan Interest Calculation Explained' },
+                  { slug: 'sip-calculation-explained', title: 'SIP Calculation Explained' },
+                  { slug: 'sip-vs-fd', title: 'SIP vs FD Comparison' },
+                  { slug: 'ppf-calculation-explained', title: 'PPF Calculation Explained' },
+                  { slug: 'fd-maturity-calculation-explained', title: 'FD Maturity Calculation Explained' },
+                  { slug: 'gst-calculation-explained', title: 'GST Calculation Explained' },
+                  { slug: 'how-to-choose-loan-tenure', title: 'How to Choose Loan Tenure' },
+                  { slug: 'principal-vs-interest-explained', title: 'Principal vs Interest Explained' },
+                ].map((guide) => (
+                  <a
+                    key={guide.slug}
+                    href={`/guides/${guide.slug}`}
+                    className="p-4 bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-700 hover:border-emerald-500 transition-all flex items-center justify-between group"
+                  >
+                    <span className="font-display font-medium text-sm text-zinc-800 dark:text-zinc-200">{guide.title}</span>
+                    <ChevronRight size={16} className="text-zinc-400 group-hover:text-emerald-500 transition-colors shrink-0" />
+                  </a>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         );
     }
